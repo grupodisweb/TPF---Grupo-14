@@ -15,7 +15,9 @@
 {% endblock %}
 
 <body>
+    {% block grid %}
     <div class="receta-grid">
+        {% endblock%}
         {% block navbar %}
 
         {{ super() }}
@@ -41,15 +43,27 @@
                 </ol>
             </div>
         </div>
+        <div class="sidebar">
+            <div class="sidebar-titulo"><h3>Recetas Similares</h3></div>
+            {% for receta in filtradas %}
+            <div class="recetas-index">
+                <p class="nombre">{{ receta.nombre }}</p>
+                <img class="receta-img" src="{{ url_for( 'static', filename=receta.get_imagen()) }}"
+                    alt="imagen de {{receta.nombre}}">
+                <a class="special-link" href="{{ url_for('detalles_receta',id=receta.id) }}">Aprender Más</a>
+            </div>
+            {% endfor %}
+        </div>
         {% endblock %}
         {% block footer %}
 
         {{ super() }}
 
         {% endblock %}
-
+        {% block grid_end %}
     </div>
-
+            {% endblock%}
+   
 
 
 </body>

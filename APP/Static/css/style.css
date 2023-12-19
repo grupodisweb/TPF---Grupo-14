@@ -2,6 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Montserrat:wght@200&family=Poppins&display=swap');
 
 /* nombres para las grid-areas */
+.sidebar-titulo {
+    text-align: center;
+    grid-area: sidebar-titulo;
+    color: #050524;
+    margin-bottom: 1vw;
+}
+
 .logo {
     grid-area: logo;
     background-color: #8e8ea5;
@@ -20,6 +27,7 @@
 .presentacion {
     grid-area: presentacion;
     color: #c0c0db !important;
+    padding: 3vw
 }
 
 .clasicas {
@@ -30,8 +38,9 @@
 .sidebar {
     grid-area: sidebar;
     background-color: #c0c0db;
-    margin-bottom: 2vw;
+    margin-bottom: 1vw;
     border-radius: 0.5vw;
+    padding: 2vw;
     padding-bottom: 5vw;
 }
 
@@ -130,6 +139,13 @@ footer {
     color: #050524;
 }
 
+.receta-grid >.recetas {
+    background-color: #c0c0db;
+    color: #050524;
+    border-radius: 0.5vw;
+    size: fit-content;
+}
+
 /* grids */
 
 @media only screen and (min-width: 1200px) {
@@ -205,6 +221,34 @@ footer {
             'logo logo'
             'navbar navbar'
             'presentacion sidebar'
+            'footer sidebar'
+        ;
+        gap: 1vw;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .receta-grid {
+        display: grid;
+        grid-template-areas:
+            'logo'
+            'navbar'
+            'recetas'
+            'sidebar'
+            'footer'
+        ;
+        gap: 3vw;
+    }
+}
+
+
+@media only screen and (min-width: 400px) {
+    .receta-grid {
+        display: grid;
+        grid-template-areas:
+            'logo logo'
+            'navbar navbar'
+            'recetas sidebar'
             'footer sidebar'
         ;
         gap: 1vw;
@@ -562,7 +606,7 @@ body {
 
 footer {
     padding: 2vw;
-    margin-bottom: 2vw;
+    margin-bottom: 1vw;
     background-color: #c0c0db;
     color: #6e6e86;
     border-radius: 0.5vw;

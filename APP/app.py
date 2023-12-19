@@ -114,24 +114,41 @@ def add_imagen(imagen,nombre_cocktail,mantener_original):
     imagen.save(os.path.join(app.config['FOLDER_IMG'], nombre_imagen))
     return directorio
 
+
+def get_recetas_from_categoria_except(id):
+    recetas = Receta.query.all()
+    tiene_o_no_alcohol = get_receta(id).tiene_alcohol
+    filtradas = []
+    i = 1
+    for receta in recetas:
+        if i <= 4 and not receta.id == id and receta.tiene_alcohol == tiene_o_no_alcohol:
+            filtradas.append(receta)
+            print(receta.nombre)
+            print(filtradas)
+            i += 1
+    return filtradas
+
+def get_last_recetas():
+    recetas = Receta.query.all()
+    filtradas = []
+    i = 1
+    for receta in recetas:
+        if i <= 4:
+            filtradas.append(receta)
+            print(receta.nombre)
+        i += 1
+    return filtradas
+
+
 # rutas de la página
 
 @app.route('/')
 def index():
-    recetas = Receta.query.all()
-    ultimas = []
-    i = 1
-    for receta in recetas:
-        if i <= 4:
-            ultimas.append(receta)
-            # print(receta.get_itself())
-            print(receta.nombre)
-        i += 1
-    return render_template('index.html', ultimas=ultimas)
+    return render_template('index.html', ultimas=get_last_recetas())
 
 @app.route('/recetas/<id>')
 def detalles_receta(id):
-    return render_template('receta.html', receta=get_receta(id))
+    return render_template('receta.html', receta=get_receta(id), filtradas=get_recetas_from_categoria_except(id))
 
 @app.route('/recetas')
 def show_all_recetas():
